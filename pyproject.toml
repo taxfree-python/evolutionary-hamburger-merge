@@ -1,0 +1,12 @@
+[project]
+name = "evolutionary-hamburger-merge"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+  {name = "taxfree_python", email = "taxfreepython@gmail.com"},
+]
+dependencies = [
+    "optuna>=4.1.0",
+]
