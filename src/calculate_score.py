@@ -38,9 +38,6 @@ def calc_weighted_diff_distance(
 
     distance = 0.0
     for item in all_items:
-        print(dictA)
-        print(dictB)
-        print(item)
         count_a = dictA[item]
         count_b = dictB[item]
         diff_count = abs(count_a - count_b)
