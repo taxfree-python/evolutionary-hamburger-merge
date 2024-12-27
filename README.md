@@ -1,1 +1,2 @@
 # evolutionary-hamburger-merge
+進化的にハンバーガーのレシピを生成する
