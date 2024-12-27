@@ -8,5 +8,8 @@ authors = [
   {name = "taxfree_python", email = "taxfreepython@gmail.com"},
 ]
 dependencies = [
+    "imageio>=2.36.1",
+    "matplotlib>=3.10.0",
     "optuna>=4.1.0",
+    "plotly>=5.24.1",
 ]

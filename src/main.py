@@ -8,6 +8,9 @@ BUNS = buns.BUNS.keys()
 FILLINGS = fillings.FILLINGS.keys()
 
 from calculate_score import evaluate_cost, evaluate_uniqueness
+from visualize_result import (
+    plot_and_save_with_plt,
+)
 
 
 def objective(trial):
@@ -35,16 +38,28 @@ def objective(trial):
 
 
 def main():
-    study = optuna.create_study(
-        directions=["minimize", "maximize"], sampler=NSGAIISampler()
-    )
-    study.optimize(objective, n_trials=100)
+    seed = 42
+    sampler = NSGAIISampler(seed=seed)
+    study = optuna.create_study(directions=["minimize", "maximize"], sampler=sampler)
+    study.optimize(objective, n_trials=1000)
 
     pareto_trials = study.best_trials
 
+    sorted_pareto_trials = sorted(
+        pareto_trials,
+        key=lambda t: (t.values[1], t.values[0]),
+    )
+    unique_threshold = 13.4
     print("Pareto Front Trials:")
-    for t in pareto_trials:
-        print(f"  Scores={t.values}, Params={t.params}")
+    for t in sorted_pareto_trials:
+        print(f"  Scores={t.values}, Params={t.params}") if t.values[
+            1
+        ] > unique_threshold else None
+
+    print("=" * 10)
+    for t in sorted_pareto_trials:
+        print(f"Recipes={t.params}") if t.values[1] > unique_threshold else None
+    plot_and_save_with_plt(study)
 
 
 if __name__ == "__main__":
